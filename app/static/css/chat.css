@@ -1,0 +1,45 @@
+.dark-input {
+    background-color: var(--primary-color);
+    filter: brightness(1.25);
+    color: var(--text-color);
+    border: none;
+    transition: filter 0.3s;
+}
+
+.dark-input:focus {
+    filter: brightness(1.5);
+    outline: none;
+    box-shadow: none;
+}
+
+.dark-input::placeholder {
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
+.icon-wrapper {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.icon-wrapper button {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 9999px;
+}
+
+.bubble-user{
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.bubble-bot{
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+}

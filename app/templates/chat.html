@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+{% endblock %}
+{% block title %}Chat{% endblock %}
+{% block content %}
+
+<div class="container-fluid vh-100 position-relative">
+
+
+    <div class="row pt-4">
+        <div class="col">
+            <h3 class="text-center mb-3">Chat With AI</h3>
+        </div>
+    </div>
+
+    <div class="row flex-grow-1">
+        <div class="col">
+            <div class="container-fluid overflow-auto" id="chartMain">
+                <div class="row col-10 mx-auto">
+                    <div class="col">
+                        <div id="chatContainer" class="" style="height: calc(100vh - 200px);">
+                            {% for msg in messages %}
+                            {% if msg.role == 'user' %}
+                            <div class="text-end mt-4 container-fluid position-relative">
+                                <div class="primary-bg-light rounded-pill p-2 d-inline-block"
+                                     style="max-width: 50%;">
+                                    <p class="m-2">
+                                        {{ msg.message }}
+                                    </p>
+                                </div>
+                                <p class="bubble-user primary-bg small rounded-pill mx-3 p-1 px-2">
+                                    {{ format_date(msg.created_at) }}
+                                </p>
+                            </div>
+                            {% elif msg.role == 'bot' %}
+                            <div class="position-relative mt-4">
+                                <div class="d-flex align-items-center ms-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"
+                                         class="me-2">
+                                        <path fill="currentColor" d="M18 10h2v2h-2zm-6 0h2v2h-2z"/>
+                                        <path fill="currentColor"
+                                              d="M26 20h-5v-2h1a2 2 0 0 0 2-2v-4h2v-2h-2V8a2 2 0 0 0-2-2h-2V2h-2v4h-4V2h-2v4h-2a2 2 0 0 0-2 2v2H6v2h2v4a2 2 0 0 0 2 2h1v2H6a2 2 0 0 0-2 2v8h2v-8h20v8h2v-8a2 2 0 0 0-2-2M10 8h12v8H10Zm3 10h6v2h-6Z"/>
+                                    </svg>
+                                    <div class="primary-bg-light rounded-pill p-2">
+                                        <p class="m-2">
+                                            {{ msg.message }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="bubble-bot small primary-bg rounded-pill mx-3 px-1">
+                                    {{ format_date(msg.created_at) }}
+                                </p>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row fixed-bottom m-5">
+    <div class="col-6 mx-auto">
+        <form method="post" action="/ask" id="chatForm">
+            <div class="position-relative">
+                <label hidden="hidden" for="message"></label>
+                <input type="text" class="dark-input p-3 ps-4 w-100 rounded-pill"
+                       placeholder="Message With AI" id="message" name="message" autocomplete="off">
+                <div class="icon-wrapper">
+                    <button type="submit">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg" class="icon-2xl">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M15.1918 8.90615C15.6381 8.45983 16.3618 8.45983 16.8081 8.90615L21.9509 14.049C22.3972 14.4953 22.3972 15.2189 21.9509 15.6652C21.5046 16.1116 20.781 16.1116 20.3347 15.6652L17.1428 12.4734V22.2857C17.1428 22.9169 16.6311 23.4286 15.9999 23.4286C15.3688 23.4286 14.8571 22.9169 14.8571 22.2857V12.4734L11.6652 15.6652C11.2189 16.1116 10.4953 16.1116 10.049 15.6652C9.60265 15.2189 9.60265 14.4953 10.049 14.049L15.1918 8.90615Z"
+                                  fill="currentColor"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</div>
+<script src="{{ url_for('static', filename='script/chat.js') }}"></script>
+{% endblock %}

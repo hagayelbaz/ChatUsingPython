@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block styles %}
+{% endblock %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container-fluid vh-100 d-flex align-items-center">
+    <div class="row w-100">
+        <div class="col-10 mx-auto">
+            <div class="col">
+                <h1 class="header p-0 m-0">
+                    Start Chatting with AI
+                </h1>
+                <p class="subheader">
+                    Ask the AI whatever you want to know.
+                </p>
+            </div>
+            <div class="col mt-5">
+                <a href="/ask" class="link-large px-4 py-3 rounded-3">
+                    <span>Ask a Question &nbsp;&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
