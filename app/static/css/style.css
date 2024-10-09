@@ -32,6 +32,9 @@
     filter: brightness(1.25);
 }
 
+.text-color {
+    color: var(--text-color);
+}
 /* endregion */
 
 /* region scrollbars */

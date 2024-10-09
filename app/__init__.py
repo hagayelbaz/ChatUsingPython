@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask
 from flask.cli import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
@@ -10,6 +9,11 @@ db = SQLAlchemy()
 socketio = SocketIO()
 
 def create_app():
+    """
+    Create a Flask app and initialize the database and socketio
+    uses the .env file to get the SECRET_KEY and DATABASE_URL
+    :return: Flask app
+    """
     load_dotenv()
 
     app = Flask(__name__)
