@@ -8,7 +8,7 @@ from flask_socketio import SocketIO
 db = SQLAlchemy()
 socketio = SocketIO()
 
-def create_app():
+def create_app(test_config=None):
     """
     Create a Flask app and initialize the database and socketio
     uses the .env file to get the SECRET_KEY and DATABASE_URL
@@ -17,9 +17,14 @@ def create_app():
     load_dotenv()
 
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config.from_mapping(
+        SECRET_KEY=os.environ.get('SECRET_KEY'),
+        SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL'),
+        SQLALCHEMY_TRACK_MODIFICATIONS=False
+    )
+
+    if test_config is not None:
+        app.config.update(test_config)
 
     db.init_app(app)
     socketio.init_app(app)
