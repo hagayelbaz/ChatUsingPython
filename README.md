@@ -71,8 +71,7 @@ Create a `.env` file in the root directory of your project and add the following
             │ ├── models.py
             │ └── ...
         ├── tests
-            ├── __init__.py
-            ├── test_views.py
+            ├── conftest.py
             └── ...
         ├── .env
         ├── requirements.txt 
